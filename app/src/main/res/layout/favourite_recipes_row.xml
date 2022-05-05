@@ -1,0 +1,157 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="favouritesEntity"
+            type="com.example.recipes.food.data.database.entity.FavouriteEntity" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favourite_recipe_Row_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/favourite_row_card_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/teal_200"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/favourite_imageView"
+                    tools:srcCompat="@tools:sample/avatars"
+                    loadImageFromUrl="@{favouritesEntity.result.image}"
+                    android:layout_width="200dp"
+                    android:layout_height="248dp"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/favourite_title"
+                    android:text="@{favouritesEntity.result.title}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/courgette"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/favourite_imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.092" />
+
+                <TextView
+                    android:id="@+id/favourite_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    parseHtml="@{favouritesEntity.result.summary}"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_title"
+                    app:layout_constraintHorizontal_bias="0.504"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_title"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_title" />
+
+                <ImageView
+                    android:id="@+id/favourite_heart_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="36dp"
+                    android:tint="@color/red"
+                    app:layout_constraintBottom_toTopOf="@+id/favourite_heart_textView"
+                    app:layout_constraintEnd_toStartOf="@+id/favourite_clock_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_description"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_description"
+                    app:srcCompat="@drawable/ic_favorite" />
+
+                <ImageView
+                    android:id="@+id/favourite_clock_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:tint="@color/yellow"
+                    app:layout_constraintStart_toEndOf="@+id/favourite_heart_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favourite_heart_imageView"
+                    app:srcCompat="@drawable/ic_access_time" />
+
+                <ImageView
+                    android:id="@+id/favourite_leaf_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/sliver"
+                    applyVeganColor="@{favouritesEntity.result.vegan}"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintStart_toEndOf="@+id/favourite_clock_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favourite_clock_imageView"
+                    app:srcCompat="@drawable/ic_eco" />
+
+                <TextView
+                    android:id="@+id/favourite_heart_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    setNumberOfLikes="@{favouritesEntity.result.aggregateLikes}"
+                    android:text="100"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_heart_imageView"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_heart_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_heart_imageView" />
+
+                <TextView
+                    android:id="@+id/favourite_clock_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    setNumberOfMinutes="@{favouritesEntity.result.readyInMinutes}"
+                    android:text="100"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_clock_imageView"
+                    app:layout_constraintHorizontal_bias="0.411"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_clock_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_clock_imageView"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/favourite_leaf_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    applyVeganColor="@{favouritesEntity.result.vegan}"
+                    android:text="Vegan"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/favourite_leaf_imageView"
+                    app:layout_constraintHorizontal_bias="0.411"
+                    app:layout_constraintStart_toStartOf="@+id/favourite_leaf_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_leaf_imageView"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

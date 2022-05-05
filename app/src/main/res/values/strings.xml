@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Recipes</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recipes_fragment">Recipes Fragment</string>
+    <string name="recipes">Recipes</string>
+    <string name="favourite">Favourite</string>
+    <string name="food_joke">Food Joke</string>
+    <string name="meat_type">Meat Type</string>
+    <string name="search">Search</string>
+    <string name="save_to_favourite">Save to Favourite</string>
+    <string name="delete_favourite_menu">Delete Favourite Menu</string>
+    <string name="delete_all">Delete All</string>
+
+    <string name="lorea">
+        The Safe Recipe Style Guidelines are designed
+        for practical use by recipe developers and food journalists.
+        With a little practice, the language will become second nature as
+        you create and edit recipes.</string>
+    <string name="share_food_joke">Share Food Joke</string>
+    <string name="share_menu">Share Menu</string>
+
+</resources>
