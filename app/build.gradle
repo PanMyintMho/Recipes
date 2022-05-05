@@ -10,12 +10,12 @@ plugins {
 
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.recipes"
         minSdk 24
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -93,7 +93,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     //Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-    implementation "androidx.core:core-ktx:+"
+ //   implementation "androidx.core:core-ktx:+"
     //jsoup
     implementation 'org.jsoup:jsoup:1.14.3'
 
