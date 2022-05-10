@@ -28,8 +28,8 @@
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
         android:layout_width="408dp"
         android:layout_height="619dp"
         app:layout_constraintBottom_toBottomOf="parent"

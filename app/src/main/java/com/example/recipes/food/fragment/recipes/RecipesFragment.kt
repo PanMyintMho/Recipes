@@ -61,7 +61,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
             recipesViewModel.backOnline = it
         })
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checknetworkAvailability(requireContext())
                 .collect { status ->
@@ -105,6 +105,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     response.data?.let {
                         mAdapter.setData(it)
                     }
+                    recipesViewModel.saveMealAndDietType()
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
@@ -132,6 +133,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     foodRecipes?.let {
                         mAdapter.setData(it)
                     }
+                  //  recipesViewModel.saveMealAndDietType()
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
@@ -148,7 +150,16 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         })
     }
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
+                    mAdapter.setData(database[0].foodRecipe)
+                }
+            })
+        }
 
+    }
 
 
     private fun applyQueries(searchQuery: String): HashMap<String, String> {
@@ -201,19 +212,10 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.recyclerview.visibility = View.VISIBLE
     }
 
-    private fun loadDataFromCache() {
-        lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
-                if (database.isNotEmpty()) {
-                    mAdapter.setData(database[0].foodRecipe)
-                }
-            })
-        }
 
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

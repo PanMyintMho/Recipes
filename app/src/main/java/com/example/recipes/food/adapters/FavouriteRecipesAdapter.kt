@@ -1,9 +1,9 @@
 package com.example.recipes.food.adapters
 
+import android.annotation.SuppressLint
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -61,6 +61,8 @@ class FavouriteRecipesAdapter(
         val currentRecipe = favouriteRecipes[position]
         holder.bind(currentRecipe)
 
+        saveItemStateOnScroll(currentRecipe,holder)
+
         /**
          * Single Click Listener
          **/
@@ -91,16 +93,34 @@ class FavouriteRecipesAdapter(
                 applySelection(holder, currentRecipe)
                 true
             } else {
-                multiSelection = false
-                false
+                applySelection(holder,currentRecipe)
+                true
+
             }
 
         }
 
     }
 
-    private fun applySelection(holder: MyViewHolder, currentRecipe: FavouriteEntity) {
+    @SuppressLint("PrivateResource")
+    private fun saveItemStateOnScroll(currentRecipe: FavouriteEntity,holder:MyViewHolder){
+        if (selectedRecipes.contains(currentRecipe)) {
+            changeRecipeStyle(
+                holder, R.color.cardBackgroundLightColor,
+                com.google.android.material.R.color.design_dark_default_color_primary)
 
+        } else {
+
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+
+        }
+
+    }
+
+
+
+    @SuppressLint("PrivateResource")
+    private fun applySelection(holder: MyViewHolder, currentRecipe: FavouriteEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
@@ -134,6 +154,7 @@ class FavouriteRecipesAdapter(
         when (selectedRecipes.size) {
             0 -> {
                 mActionMode.finish()
+                multiSelection = false
             }
             1 -> {
                 mActionMode.title = "${selectedRecipes.size} item selected"
@@ -206,15 +227,18 @@ class FavouriteRecipesAdapter(
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(rootView,
+        Snackbar.make(
+            rootView,
             message,
-            Snackbar.LENGTH_SHORT)
+            Snackbar.LENGTH_SHORT
+        )
             .setAction("Okay") {}
             .show()
 
     }
-    fun clearDeleteActionMode(){
-        if (this::mActionMode.isInitialized){
+
+    fun clearDeleteActionMode() {
+        if (this::mActionMode.isInitialized) {
             mActionMode.finish()
         }
     }

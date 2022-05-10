@@ -17,7 +17,7 @@
         android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
+            android:layout_width="374dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -32,70 +32,57 @@
             tools:ignore="MissingConstraints">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="364dp"
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/recipe_image"
                     loadImageFromUrl="@{result.image}"
                     android:layout_width="179dp"
-                    android:layout_height="248dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_height="0dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ImageContrastCheck"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="199dp"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/courgette"
                     android:gravity="center_vertical"
                     android:maxLines="2"
                     android:text="@{result.title}"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/recipe_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_description"
                     parseHtml="@{result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="65dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="6dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/title"
-                    app:layout_constraintTop_toBottomOf="@+id/title"
-                    app:layout_constraintVertical_bias="0.09" />
+                    app:layout_constraintTop_toBottomOf="@+id/title" />
 
                 <ImageView
                     android:id="@+id/heart_imageView"
-                    android:layout_width="49dp"
-                    android:layout_height="21dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/time_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="@+id/text_description"
                     app:layout_constraintTop_toBottomOf="@+id/text_description"
-                    app:layout_constraintVertical_bias="0.507"
                     app:srcCompat="@drawable/ic_favorite"
                     app:tint="@color/red" />
 
@@ -103,67 +90,64 @@
                     android:id="@+id/time_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_clock"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toStartOf="@+id/leaf_imageView"
                     app:layout_constraintStart_toEndOf="@+id/heart_imageView"
                     app:layout_constraintTop_toTopOf="@+id/heart_imageView"
                     app:srcCompat="@drawable/ic_access_time"
                     app:tint="@color/chipBackgroundColor" />
 
+                <TextView
+                    android:id="@+id/txt_clock"
+                    android:layout_width="23dp"
+                    android:layout_height="21dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{String.valueOf(result.readyInMinutes)}"
+                    android:textColor="@color/chipBackgroundColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/time_imageView"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/time_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/time_imageView"
+                    app:layout_constraintVertical_bias="1.0" />
+
                 <ImageView
                     android:id="@+id/leaf_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_leaf"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/time_imageView"
                     app:layout_constraintTop_toTopOf="@+id/time_imageView"
                     app:srcCompat="@drawable/ic_eco" />
 
                 <TextView
-                    android:id="@+id/txt_heart"
-                    setNumberOfLikes="@{result.aggregateLikes}"
-                    android:layout_width="45dp"
-                    android:layout_height="21dp"
-                    android:layout_marginTop="3dp"
-                    android:text="100"
-                    android:textAlignment="center"
-                    android:textColor="@color/red"
-                    app:layout_constraintEnd_toEndOf="@+id/heart_imageView"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/heart_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/heart_imageView" />
-
-                <TextView
-                    android:id="@+id/txt_clock"
-                    setNumberOfMinutes="@{result.readyInMinutes}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textAlignment="center"
-                    android:textColor="@color/chipBackgroundColor"
-                    app:layout_constraintEnd_toEndOf="@+id/time_imageView"
-                    app:layout_constraintStart_toStartOf="@+id/time_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/time_imageView" />
-
-                <TextView
                     android:id="@+id/txt_leaf"
                     applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Vegan"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/leaf_imageView"
+                    app:layout_constraintHorizontal_bias="0.062"
                     app:layout_constraintStart_toStartOf="@+id/leaf_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/leaf_imageView">
+                    app:layout_constraintTop_toBottomOf="@+id/leaf_imageView" />
 
-                </TextView>
-
+                <TextView
+                    android:id="@+id/txt_heart"
+                    android:layout_width="23dp"
+                    android:layout_height="21dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{String.valueOf(result.aggregateLikes)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/heart_imageView"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/heart_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/heart_imageView"
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

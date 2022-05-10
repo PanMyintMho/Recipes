@@ -1,9 +1,7 @@
 package com.example.recipes.food.data
 
 import android.content.Context
-import android.preference.PreferenceDataStore
 import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.recipes.food.util.Constants.Companion.DEFAULT_DIET_TYPE
@@ -16,11 +14,9 @@ import com.example.recipes.food.util.Constants.Companion.PREFERENCE_MEAL_TYPE_ID
 import com.example.recipes.food.util.Constants.Companion.PREFERENCE_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
-import java.util.concurrent.Flow
 import javax.inject.Inject
 
 
@@ -75,7 +71,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         .map { preferences ->
 
             val selectedMealType = preferences[PreferenceKeys.selectedMealType] ?: DEFAULT_MEAL_TYPE
-            val selectedMealTypeId = preferences[PreferenceKeys.selectedDietTypeId] ?: 0
+            val selectedMealTypeId = preferences[PreferenceKeys.selectedMealTypeId] ?: 0
             val selectedDietType = preferences[PreferenceKeys.selectedDietType] ?: DEFAULT_DIET_TYPE
             val selectedDietTypeId = preferences[PreferenceKeys.selectedDietTypeId] ?: 0
             MealAndDietType(

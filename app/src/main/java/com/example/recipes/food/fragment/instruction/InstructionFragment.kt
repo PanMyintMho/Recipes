@@ -6,20 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
-import com.example.recipes.R
 import com.example.recipes.databinding.FragmentInstructionBinding
 import com.example.recipes.food.models.Result
 import com.example.recipes.food.util.Constants.Companion.RECIPES_RESULT_KEY
 
 class InstructionFragment : Fragment() {
 
-    private lateinit var bindindg: FragmentInstructionBinding
+    private  var _bindindg: FragmentInstructionBinding?=null
+    private val bindindg get() = _bindindg!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         // Inflate the layout for this fragment
-        bindindg = FragmentInstructionBinding.inflate(inflater, container, false)
+        _bindindg = FragmentInstructionBinding.inflate(inflater, container, false)
 
         val args = arguments
         val myBundle: Result?= args?.getParcelable(RECIPES_RESULT_KEY)
@@ -28,6 +29,11 @@ class InstructionFragment : Fragment() {
         bindindg.insructionWebView.loadUrl(websiteUrl)
         return bindindg.root
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _bindindg =null
     }
 
 }

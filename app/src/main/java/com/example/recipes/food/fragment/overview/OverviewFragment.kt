@@ -5,133 +5,59 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import coil.load
 import com.example.recipes.R
 import com.example.recipes.databinding.FragmentOverviewBinding
+import com.example.recipes.food.bindingAdapter.RecipesRowBinding
 import com.example.recipes.food.models.Result
 import com.example.recipes.food.util.Constants.Companion.RECIPES_RESULT_KEY
 import org.jsoup.Jsoup
 
 
 class OverviewFragment : Fragment() {
-    private lateinit var binding: FragmentOverviewBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private  var _binding: FragmentOverviewBinding? =null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentOverviewBinding.inflate(inflater, container, false)
+        _binding = FragmentOverviewBinding.inflate(inflater, container, false)
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(RECIPES_RESULT_KEY)
-        binding.mainImageView.load(myBundle?.image)
-        binding.titleTextView.text = myBundle?.title
-        binding.likesTextView.text = myBundle?.aggregateLikes.toString()
-        binding.clockTextView.text = myBundle?.readyInMinutes.toString()
-        myBundle?.summary.let {
-            val summary= it?.let { it1 -> Jsoup.parse(it1).text() }
-            binding.summarTextView.text = summary
-        }
+        val myBundle: Result = args!!.getParcelable<Result>(RECIPES_RESULT_KEY) as Result
+        binding.mainImageView.load(myBundle.image)
+        binding.titleTextView.text = myBundle.title
+        binding.likesTextView.text = myBundle.aggregateLikes.toString()
+        binding.clockTextView.text = myBundle.readyInMinutes.toString()
+        RecipesRowBinding.parseHtml(binding.summarTextView, myBundle.summary)
 
 
-        if (myBundle?.vegetarian == true) {
-            binding.vegetarianImageView.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-            binding.vegetarianTextView.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-
-        }
-        if (myBundle?.vegan == true) {
-            binding.veganImageView.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-            binding.veganTextView.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-        }
-
-        if (myBundle?.glutenFree == true) {
-            binding.glutenImageView.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-            binding.glutenTextView.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-        }
-
-        if (myBundle?.dairyFree == true) {
-            binding.dairyImageView.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-            binding.dairyTextView.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-        }
-
-        if (myBundle?.veryHealthy == true) {
-            binding.healthImageView.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-            binding.healthTextView.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-        }
+        updateColor(myBundle.vegetarian,binding.vegetarianTextView,binding.vegetarianImageView)
+        updateColor(myBundle.vegan,binding.veganTextView,binding.veganImageView)
+        updateColor(myBundle.cheap,binding.cheapTextView,binding.cheapImageView)
+        updateColor(myBundle.dairyFree,binding.dairyTextView,binding.dairyImageView)
+        updateColor(myBundle.glutenFree,binding.glutenTextView,binding.glutenImageView)
+        updateColor(myBundle.veryHealthy,binding.healthTextView,binding.healthImageView)
 
 
-        if (myBundle?.cheap == true) {
-            binding.cheapImageView.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-            binding.cheapTextView.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.green
-                )
-            )
-        }
+
         return binding.root
+    }
 
+    private fun updateColor(stateIsOn :Boolean,textView:TextView,imageView:ImageView){
+       if (stateIsOn){
+           imageView.setColorFilter(ContextCompat.getColor(requireContext(),R.color.green))
+            textView.setTextColor(ContextCompat.getColor(requireContext(),R.color.green))
 
+       }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding =null
     }
 }

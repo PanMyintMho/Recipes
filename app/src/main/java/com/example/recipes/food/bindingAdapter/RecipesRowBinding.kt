@@ -21,12 +21,10 @@ class RecipesRowBinding {
         @JvmStatic
         fun onRecipesClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
             Log.d("onRecipesClickListener", "CALLED")
-
             recipeRowLayout.setOnClickListener {
                 try {
                     val action =
                         RecipesFragmentDirections.actionRecipesFragmentToDetailActivity(result)
-
                     recipeRowLayout.findNavController().navigate(action)
                 } catch (e: Exception) {
                     Log.d("onRecipesClickListener", e.toString())
@@ -43,19 +41,6 @@ class RecipesRowBinding {
                 error(R.drawable.ic_baseline_error_24)
             }
         }
-
-        @BindingAdapter("setNumberOfLikes")
-        @JvmStatic
-        fun setNumberOfLikes(textView: TextView, likes: Int) {
-            textView.text = likes.toString()
-        }
-
-        @BindingAdapter("setNumberOfMinutes")
-        @JvmStatic
-        fun setNumberOfMinutes(textView: TextView, minutes: Int) {
-            textView.text = minutes.toString()
-        }
-
         @BindingAdapter("applyVeganColor")
         @JvmStatic
         fun applyVeganColor(view: View, vegan: Boolean) {

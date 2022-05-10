@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.example.recipes.food.data.database.RecipesDatabase
 import com.example.recipes.food.util.Constants.Companion.DATABASE_NAME
-import com.example.recipes.food.viewModel.RecipesViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

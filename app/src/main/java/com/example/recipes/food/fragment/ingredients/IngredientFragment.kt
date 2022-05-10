@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recipes.R
 import com.example.recipes.databinding.FragmentIngredientBinding
 import com.example.recipes.food.adapters.IngredientAdapter
 import com.example.recipes.food.models.Result
@@ -14,7 +13,11 @@ import com.example.recipes.food.util.Constants.Companion.RECIPES_RESULT_KEY
 
 
 class IngredientFragment : Fragment() {
-    private lateinit var binding: FragmentIngredientBinding
+
+
+    private  var _binding: FragmentIngredientBinding?= null
+    private val binding get() = _binding!!
+
     private val mAdapter:IngredientAdapter by lazy { IngredientAdapter() }
 
 
@@ -22,7 +25,7 @@ class IngredientFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentIngredientBinding.inflate(inflater, container, false)
+        _binding = FragmentIngredientBinding.inflate(inflater, container, false)
        val args= arguments
         val myBundle : Result? = args?.getParcelable(RECIPES_RESULT_KEY)!!
         setupRecyclerView()
@@ -35,6 +38,12 @@ class IngredientFragment : Fragment() {
     private fun setupRecyclerView(){
         binding.ingredientRecycler.adapter = mAdapter
         binding.ingredientRecycler.layoutManager=LinearLayoutManager(requireContext())
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
 
     }
 

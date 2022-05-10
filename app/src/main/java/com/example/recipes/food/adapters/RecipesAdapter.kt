@@ -10,13 +10,15 @@ import com.example.recipes.food.models.Result
 import com.example.recipes.food.util.RecipesDiffUtil
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
-    private var recipe = emptyList<com.example.recipes.food.models.Result>()
+    private var recipe = emptyList<Result>()
+
     class MyViewHolder(private val binding: RecipesResourceRowXmlBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(result: Result) {
             binding.result = result
             binding.executePendingBindings()
         }
+
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,7 +29,6 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-
         return MyViewHolder.from(parent)
     }
 
@@ -39,10 +40,11 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
     override fun getItemCount(): Int {
         return recipe.size
     }
-    fun setData(newData:FoodRecipe){
-        val recipesDiffUtil=RecipesDiffUtil(recipe,newData.results)
-        val diffUtilResult= DiffUtil.calculateDiff(recipesDiffUtil)
-        recipe=newData.results
+
+    fun setData(newData: FoodRecipe) {
+        val recipesDiffUtil = RecipesDiffUtil(recipe, newData.results)
+        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
+        recipe = newData.results
         diffUtilResult.dispatchUpdatesTo(this)
     }
 

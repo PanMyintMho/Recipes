@@ -4,7 +4,6 @@ import androidx.room.*
 import com.example.recipes.food.data.database.entity.FavouriteEntity
 import com.example.recipes.food.data.database.entity.FoodJokeEntity
 import com.example.recipes.food.data.database.entity.RecipesEntity
-import com.example.recipes.food.models.FoodJoke
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,7 +16,7 @@ interface RecipesDao {
     suspend fun insertFavouriteRecipes(favouriteEntity: FavouriteEntity)
 
     @Query("SELECT * FROM recipes_table ORDER BY id ASC")
-    fun readRecipes(): kotlinx.coroutines.flow.Flow<List<RecipesEntity>>
+    fun readRecipes(): Flow<List<RecipesEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity)

@@ -83,40 +83,40 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="36dp"
-                    android:tint="@color/red"
                     app:layout_constraintBottom_toTopOf="@+id/favourite_heart_textView"
                     app:layout_constraintEnd_toStartOf="@+id/favourite_clock_imageView"
                     app:layout_constraintStart_toStartOf="@+id/favourite_description"
                     app:layout_constraintTop_toBottomOf="@+id/favourite_description"
-                    app:srcCompat="@drawable/ic_favorite" />
+                    app:srcCompat="@drawable/ic_favorite"
+                    app:tint="@color/red"
+                    />
 
                 <ImageView
                     android:id="@+id/favourite_clock_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:tint="@color/yellow"
                     app:layout_constraintStart_toEndOf="@+id/favourite_heart_imageView"
                     app:layout_constraintTop_toTopOf="@+id/favourite_heart_imageView"
-                    app:srcCompat="@drawable/ic_access_time" />
+                    app:srcCompat="@drawable/ic_access_time"
+                    app:tint="@color/yellow" />
 
                 <ImageView
                     android:id="@+id/favourite_leaf_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@color/sliver"
                     applyVeganColor="@{favouritesEntity.result.vegan}"
                     android:layout_marginStart="32dp"
                     app:layout_constraintStart_toEndOf="@+id/favourite_clock_imageView"
                     app:layout_constraintTop_toTopOf="@+id/favourite_clock_imageView"
-                    app:srcCompat="@drawable/ic_eco" />
+                    app:srcCompat="@drawable/ic_eco"
+                    app:tint="@color/sliver" />
 
                 <TextView
                     android:id="@+id/favourite_heart_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    setNumberOfLikes="@{favouritesEntity.result.aggregateLikes}"
-                    android:text="100"
+                    android:text="@{String.valueOf(favouritesEntity.result.aggregateLikes)}"
                     app:layout_constraintEnd_toEndOf="@+id/favourite_heart_imageView"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/favourite_heart_imageView"
@@ -126,8 +126,7 @@
                     android:id="@+id/favourite_clock_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    setNumberOfMinutes="@{favouritesEntity.result.readyInMinutes}"
-                    android:text="100"
+                    android:text="@{String.valueOf(favouritesEntity.result.readyInMinutes)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/favourite_clock_imageView"
                     app:layout_constraintHorizontal_bias="0.411"

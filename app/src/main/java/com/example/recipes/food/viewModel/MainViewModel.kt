@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.lifecycle.*
@@ -40,7 +39,7 @@ class MainViewModel @Inject constructor(
         }
 
 
-    fun insertFoodJoke(foodJokeEntity: FoodJokeEntity) =
+    private fun insertFoodJoke(foodJokeEntity: FoodJokeEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertFoodJoke(foodJokeEntity)
         }
@@ -91,7 +90,6 @@ class MainViewModel @Inject constructor(
                 Log.d(TAG, "You reach this state")
                 val response = repository.remote.getRecipes(queries)
                 recipesResponse.value = handleFoodRecipesResponse(response)
-
                 val foodRecipe = recipesResponse.value!!.data
                 if (foodRecipe != null) {
                     offlineCacheRecipes(foodRecipe)
@@ -158,7 +156,7 @@ class MainViewModel @Inject constructor(
     }
 
 
-    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke>? {
+    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -178,7 +176,7 @@ class MainViewModel @Inject constructor(
 
     }
 
-    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
+    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe> {
 
         when {
             response.message().toString().contains("timeout") -> {
