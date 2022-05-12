@@ -3,9 +3,7 @@ package com.example.recipes.food.bindingAdapter
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.datastore.dataStore
 import com.example.recipes.food.data.database.entity.FoodJokeEntity
 import com.example.recipes.food.models.FoodJoke
 import com.example.recipes.food.util.NetworkResult

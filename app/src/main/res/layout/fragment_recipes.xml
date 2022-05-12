@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:shimmer_repeat_mode="restart"
-            app:shimmer_shape="radial">
+            app:shimmer_shape="radial"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="-255dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,7 +43,15 @@
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/recipe_fab"
@@ -52,16 +62,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="#ffdd00" />
-
         <ImageView
             android:id="@+id/error_imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
             readApiResponse="@{mainViewModel.recipesResponse}"
             readDatabase="@{mainViewModel.readRecipes}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:alpha="0.5"
             android:src="@drawable/ic_very_dissatisfied"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/shimmerframe"
             app:layout_constraintStart_toStartOf="@+id/shimmerframe"
@@ -77,11 +86,11 @@
             android:alpha="0.5"
             android:text="@string/no_internet_connection"
             android:textSize="18sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/error_imageView"
             app:layout_constraintStart_toStartOf="@+id/error_imageView"
             app:layout_constraintTop_toBottomOf="@+id/error_imageView" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

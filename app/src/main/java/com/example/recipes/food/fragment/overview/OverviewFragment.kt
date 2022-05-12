@@ -14,7 +14,6 @@ import com.example.recipes.databinding.FragmentOverviewBinding
 import com.example.recipes.food.bindingAdapter.RecipesRowBinding
 import com.example.recipes.food.models.Result
 import com.example.recipes.food.util.Constants.Companion.RECIPES_RESULT_KEY
-import org.jsoup.Jsoup
 
 
 class OverviewFragment : Fragment() {

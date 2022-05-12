@@ -1,21 +1,20 @@
 package com.example.recipes.food.fragment.foodJoke
 
 import android.content.Intent
-import android.net.Network
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+//import androidx.lifecycle.lifecycleScope
 import com.example.recipes.R
 import com.example.recipes.databinding.FragmentFoodJokeBinding
 import com.example.recipes.food.util.Constants.Companion.API_KEY
 import com.example.recipes.food.util.NetworkResult
 import com.example.recipes.food.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+//import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FoodJokeFragment : Fragment() {
@@ -27,19 +26,19 @@ class FoodJokeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = mainViewModel
         setHasOptionsMenu(true)
         mainViewModel.getFoodJoke(API_KEY)
-        mainViewModel.foodJokeResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.foodJokeResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     binding.foodJokeTextView.text = response.data?.text
 
-                    if (response.data != null){
-                        foodJoke= response.data.text
+                    if (response.data != null) {
+                        foodJoke = response.data.text
                     }
                 }
                 is NetworkResult.Error -> {
@@ -54,7 +53,7 @@ class FoodJokeFragment : Fragment() {
                     Log.d("FoodJokeFragment", "Loading")
                 }
             }
-        })
+        }
 
         return binding.root
     }
@@ -77,12 +76,12 @@ class FoodJokeFragment : Fragment() {
     }
 
     private fun loadDataFromCache() {
-        mainViewModel.readFoodJoke.observe(viewLifecycleOwner,{database ->
-            if (database.isNotEmpty() && database !=null){
+        mainViewModel.readFoodJoke.observe(viewLifecycleOwner) { database ->
+            if (database.isNotEmpty() && database != null) {
                 binding.foodJokeTextView.text = database[0].foodJoke.text
-                foodJoke=database[0].foodJoke.text
+                foodJoke = database[0].foodJoke.text
             }
-        })
+        }
     }
     override fun onDestroyView() {
             super.onDestroyView()

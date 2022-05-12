@@ -54,8 +54,6 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginEnd="8dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/courgette"
-                    android:gravity="center_vertical"
                     android:maxLines="2"
                     android:text="@{result.title}"
                     android:textSize="20sp"
@@ -110,7 +108,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/time_imageView"
                     app:layout_constraintTop_toBottomOf="@+id/time_imageView"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/leaf_imageView"
@@ -132,9 +130,10 @@
                     android:text="Vegan"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/leaf_imageView"
-                    app:layout_constraintHorizontal_bias="0.062"
+                    app:layout_constraintHorizontal_bias="0.625"
                     app:layout_constraintStart_toStartOf="@+id/leaf_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/leaf_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/leaf_imageView"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/txt_heart"
@@ -144,7 +143,7 @@
                     android:text="@{String.valueOf(result.aggregateLikes)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/heart_imageView"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/heart_imageView"
                     app:layout_constraintTop_toBottomOf="@+id/heart_imageView"
                     app:layout_constraintVertical_bias="0.0" />

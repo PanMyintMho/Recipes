@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/SplashScreenStyle">
+        android:theme="@style/SplashScreenStyle"
+        android:dataExtractionRules="@xml/data_extraction_rules">
         <activity android:name=".food.newUi.DetailActivity"
             android:label="Details"
           android:theme="@style/DetailActivityStyle"

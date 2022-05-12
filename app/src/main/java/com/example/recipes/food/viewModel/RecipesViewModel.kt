@@ -26,29 +26,36 @@ class RecipesViewModel @Inject constructor(
     application: Application,
     private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {
-    private lateinit var mealAndDietType: MealAndDietType
+
+    private lateinit var mealAndDiet: MealAndDietType
+
     var networkStatus = false
     var backOnline = false
     val readMealAndDietType = dataStoreRepository.readMealAndDietType
     var readBackOnline = dataStoreRepository.readBackOnline.asLiveData()
 
+
     fun saveMealAndDietType() =
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveMealAndDietType(
-                mealAndDietType.selectedMealType,
-                mealAndDietType.selectedMealTypeId,
-                mealAndDietType.selectedDietType,
-                mealAndDietType.selectedDietTypeId
-            )
+           try {
+               dataStoreRepository.saveMealAndDietType(
+                   mealAndDiet.selectedMealType,
+                   mealAndDiet.selectedMealTypeId,
+                   mealAndDiet.selectedDietType,
+                   mealAndDiet.selectedDietTypeId
+               )
+           }
+           catch (e:Exception){
+
+           }
 
         }
-
 
     fun saveMealAndDietTypeTemp(
         mealType: String, mealTypeId: Int,
         dietType: String, dietTypeId: Int
     ) {
-        mealAndDietType = MealAndDietType(
+        mealAndDiet = MealAndDietType(
             mealType,
             mealTypeId,
             dietType,
@@ -67,8 +74,10 @@ class RecipesViewModel @Inject constructor(
         val queries: HashMap<String, String> = HashMap()
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
         queries[QUERY_API_KEY] = API_KEY
-        queries[QUERY_TYPE] = mealAndDietType.selectedMealType
-        queries[QUERY_DIET] = mealAndDietType.selectedDietType
+        if (this::mealAndDiet.isInitialized) {
+            queries[QUERY_TYPE] = mealAndDiet.selectedMealType
+            queries[QUERY_DIET] = mealAndDiet.selectedDietType
+        }
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[QUERY_FILL_INGEREDIENTS] = "true"
         return queries

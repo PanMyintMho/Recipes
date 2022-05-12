@@ -30,13 +30,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val selectedMealTypeId = intPreferencesKey(PREFERENCE_MEAL_TYPE_ID)
         val selectedDietType = stringPreferencesKey(PREFERENCE_DIET_TYPE)
         val selectedDietTypeId = intPreferencesKey(PREFERENCE_DIET_TYPE_ID)
-
-        val backOnline = booleanPreferencesKey(PREFERENCES_BACK_ONLINE)
+         val backOnline = booleanPreferencesKey(PREFERENCES_BACK_ONLINE)
 
 
     }
 
-    suspend fun saveMealAndDietType(
+     suspend fun saveMealAndDietType(
         mealType: String,
         mealTypeId: Int,
         dietType: String,
@@ -98,7 +97,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
 
 }
-data class MealAndDietType(
+  data class MealAndDietType(
     val selectedMealType: String,
     val selectedMealTypeId: Int,
     val selectedDietType: String,

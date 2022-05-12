@@ -42,7 +42,8 @@
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/favourite_title"
@@ -54,7 +55,6 @@
                     android:layout_marginEnd="16dp"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:fontFamily="@font/courgette"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"

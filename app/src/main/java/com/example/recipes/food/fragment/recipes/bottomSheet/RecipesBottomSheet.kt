@@ -53,7 +53,7 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
 
         })
 
-        binding.mealTypeChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+        binding.mealTypeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
             mealTypeChip = selectedMealType

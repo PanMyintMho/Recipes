@@ -30,6 +30,26 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            motion:layout_constraintEnd_toStartOf="@+id/clock_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@+id/likes_textView"
+            motion:layout_constraintVertical_bias="1.0"
+            android:layout_marginEnd="24dp"
+            motion:layout_constraintTop_toTopOf="@+id/clock_imageView"
+            android:id="@+id/likes_imageView"
+            motion:layout_constraintStart_toEndOf="@+id/gradient_overlay" />
+        <Constraint
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/title_textView"
+            android:layout_marginStart="4dp"
+            motion:layout_constraintStart_toStartOf="@+id/title_textView"
+            android:layout_marginTop="40dp"
+            android:id="@+id/vegetarian_imageView"
+            motion:layout_constraintEnd_toStartOf="@+id/vegetarian_textView"
+            motion:layout_constraintBottom_toTopOf="@+id/vegan_imageView" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

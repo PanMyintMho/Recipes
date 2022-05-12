@@ -84,7 +84,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("ReciFragment", "readDatabase Called!")
                     mAdapter.setData(database[0].foodRecipe)
@@ -97,6 +97,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun requestApiData() {
+        Log.d("API","Call API data")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -125,7 +126,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun searchApiData(searchQuery: String) {
         showShimmerEffect()
         mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
-        mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.searchRecipesResponse.observeOnce(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -133,7 +134,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     foodRecipes?.let {
                         mAdapter.setData(it)
                     }
-                  //  recipesViewModel.saveMealAndDietType()
+                   // recipesViewModel.saveMealAndDietType()
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
