@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
+import com.example.recipes.R
 import com.example.recipes.databinding.RecipesBottomSheetBinding
 import com.example.recipes.food.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.example.recipes.food.util.Constants.Companion.DEFAULT_MEAL_TYPE
@@ -53,14 +54,17 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
 
         })
 
-        binding.mealTypeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
+
+
+
+       binding.mealTypeChipGroup.setOnCheckedChangeListener{ group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
             mealTypeChip = selectedMealType
             mealTypeChipId = selectedChipId
         }
 
-        binding.dietChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+       binding.dietChipGroup.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedDietType = chip.text.toString().lowercase(Locale.ROOT)
             dietTypeChip = selectedDietType
@@ -80,7 +84,6 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
             findNavController().navigate(action)
         }
         return binding.root
-
     }
 
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
@@ -95,8 +98,8 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 }
